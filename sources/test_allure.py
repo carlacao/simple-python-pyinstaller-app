@@ -75,3 +75,5 @@ class TestShoppingPay(object):
 @allure.step('用户登录')  # 将函数作为一个步骤，调用此函数时，报告中输出这个步骤，我把这样的函数叫“step函数”
 def login(user, pwd):
     print(user, pwd)
+if __name__ == '__main__':
+    pytest.main(['-s', '-q', '--alluredir', './report/xml'])
