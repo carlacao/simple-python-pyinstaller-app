@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'pytest --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
-            }:
+            }
         }
 
     }
