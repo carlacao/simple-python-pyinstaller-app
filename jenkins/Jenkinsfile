@@ -20,10 +20,11 @@ pipeline {
             steps {
                 sh 'pytest --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
+                sh 'allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]'
             }
             post {
                 always {
-                  sh 'allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]'
+                 echo test
                 }
             }
         }
