@@ -23,10 +23,21 @@ pipeline {
             }
             post {
                 always {
+           
                  echo start generate report
                  sh 'allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]'
                  echo end test
                 }
+            }
+        }
+        stage('Test-report') {
+            agent {
+                any
+            }
+            steps {
+                 echo start generate report
+                 sh 'allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]'
+                 echo end test
             }
         }
 
