@@ -29,11 +29,10 @@ pipeline {
         }
         stage('Test-report') {
             agent {
-                none
+                any
             }
             steps {
-               sh 'allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]'
-                
+                sh 'allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]'
             }
         }
 
