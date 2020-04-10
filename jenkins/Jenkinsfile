@@ -14,7 +14,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'pytest/cyy'
+                    image 'pytest/cyy:v1'
                 }
             }
             steps {
