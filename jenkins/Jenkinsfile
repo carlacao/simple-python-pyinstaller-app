@@ -18,7 +18,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'pytest --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+                sh 'pytest --verbose --junit-xml test-reports/results-test-calc.xml sources/test_calc.py'
+                sh 'pytest --verbose --junit-xml test-reports/results-test-allure.xml sources/test_allure.py'
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
         }
