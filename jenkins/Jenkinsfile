@@ -12,6 +12,9 @@ pipeline {
             }
         }
         stage('Test') {
+           environment {
+            JAVA_HOME = "/usr/lib/jvm/java-1.8-openjdk"
+           }
             agent {
                 docker {
                     image 'pytest/cyy:v1'
