@@ -24,7 +24,7 @@ pipeline {
             }
             post {
                 always {
-                    allure includeProperties: false, jdk: '/usr/bin/java', results: [[path: 'allure-results']]
+                    allure includeProperties: false, jdk: '/usr/lib/jvm/java-1.8-openjdk', results: [[path: 'allure-results']]
                     junit 'test-reports/results-test-allure.xml'
                     archiveArtifacts 'test-reports/results-test-allure.xml' 
                 }
