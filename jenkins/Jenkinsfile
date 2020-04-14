@@ -25,7 +25,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results-test-allure.xml'
-                    archiveArtifacts 'dist/add2vals' 
+                    archiveArtifacts 'test-reports/results-test-allure.xml' 
                 }
             }
         }
