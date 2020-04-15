@@ -30,7 +30,7 @@ class TestShoppingTrolley(object):
         """
         用例描述：修改购物车的物品
         """
-        assert '2' == '22'
+        assert '22' == '22'
 
     @allure.story('向购物车重复增加物品')
     @allure.severity('normal')
@@ -38,7 +38,7 @@ class TestShoppingTrolley(object):
         """
         用例描述：增加重复的物品到购物车
         """
-        assert '1' == '12'
+        assert '12' == '12'
 
     @pytest.mark.skipif(reason='本次不执行')
     @allure.story('删除购物车中商品')
@@ -47,7 +47,7 @@ class TestShoppingTrolley(object):
         """
         用例描述：删除购物车中的物品
         """
-        assert '333' == '3233'
+        assert '333' == '333'
 
 
 
