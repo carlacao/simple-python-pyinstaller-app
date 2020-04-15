@@ -24,16 +24,28 @@ pipeline {
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
             post {
-            environment {
-                  JAVA_HOME = "/usr/lib/jvm/java-1.8-openjdk"
-            }
                 always {
                     junit 'test-reports/results-test-allure.xml'
                     archiveArtifacts 'test-reports/results-test-allure.xml' 
-                    allure includeProperties: false, jdk: '/usr/lib/jvm/java-1.8-openjdk', results: [[path: 'allure-results']]
                 }
             }
         }
-
+		stage(‘reports’){
+		 agent{
+		          none
+		 }
+		 
+		 steps {
+            script {
+            allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+            ])
+           }
+        }
+		}
     }
 }
