@@ -26,14 +26,10 @@ pipeline {
    }
     post{
          always{
-             agent{
-                  docker {
-                   image 'openjdk:8-jre'
-                  }
-            }
+             agent{docker 'openjdk:8-jre'}
              steps{
-              sh "echo $JAVA_HOME"
-             script {
+               sh "echo $JAVA_HOME"
+               script {
                  allure([
                         includeProperties: false,
                         jdk: '',
@@ -41,8 +37,8 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'allure-results']]
                       ])
-                   }
-          }
+                 }
+              }
         }
     }
 }
