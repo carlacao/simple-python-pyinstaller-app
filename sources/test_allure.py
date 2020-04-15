@@ -30,7 +30,7 @@ class TestShoppingTrolley(object):
         """
         用例描述：修改购物车的物品
         """
-        assert '22' == '2s2'
+        assert '22' == '22'
 
     @allure.story('向购物车重复增加物品')
     @allure.severity('normal')
@@ -38,8 +38,11 @@ class TestShoppingTrolley(object):
         """
         用例描述：增加重复的物品到购物车
         """
-        assert '12' == '1s2'
-
+        try:
+            assert '12' == '1s2'
+        except AssertionError as e:
+            print(e)
+            raise
     @pytest.mark.skipif(reason='本次不执行')
     @allure.story('删除购物车中商品')
     @allure.severity('minor')
@@ -56,7 +59,7 @@ class TestShoppingPay(object):
     @allure.story('使用微信付款')  # 用story说明用户场景，可以理解为用例
     @allure.severity('trivial')
     def test_pay_by_weixin(self):
-     
+       
        assert 'success' == 'success'
 
     @allure.story('使用支付宝付款')
