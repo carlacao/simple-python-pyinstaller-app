@@ -16,7 +16,7 @@ pipeline {
           
             agent {
                 docker {
-                    image 'python36-pytest-jdk8:v1'
+                    image 'python36-pytest-jdk8:v2'
                 }
             }
             steps {
