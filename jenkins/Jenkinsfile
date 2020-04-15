@@ -12,9 +12,7 @@ pipeline {
             }
         }
         stage('Test') {
-           environment {
-            JAVA_HOME = "/usr/lib/jvm/java-1.8-openjdk"
-           }
+          
             agent {
                 docker {
                     image 'pytest/cyy:v1'
@@ -26,10 +24,13 @@ pipeline {
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
             post {
+            environment {
+                  JAVA_HOME = "/usr/lib/jvm/java-1.8-openjdk"
+            }
                 always {
-                    allure includeProperties: false, jdk: '/usr/lib/jvm/java-1.8-openjdk', results: [[path: 'allure-results']]
                     junit 'test-reports/results-test-allure.xml'
                     archiveArtifacts 'test-reports/results-test-allure.xml' 
+                    allure includeProperties: false, jdk: '/usr/lib/jvm/java-1.8-openjdk', results: [[path: 'allure-results']]
                 }
             }
         }
