@@ -19,13 +19,20 @@ pipeline {
                 }
             }
             steps {
-                sh 'pytest --verbose --junit-xml test-reports/results-test-calc.xml sources/test_calc.py'
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
-            post {
-                always {
-                   script {
-                     allure([
+        }
+		
+        stage('Report'){
+		agent{
+		   docker {
+		   image 'openjdk:8-jre'
+		   }
+		}
+		post {
+           always {
+               script {
+                 allure([
                         includeProperties: false,
                         jdk: '',
                         properties: [],
@@ -35,6 +42,6 @@ pipeline {
                    }
                 }
             }
-        }
-}
+		}
+   }
 }
