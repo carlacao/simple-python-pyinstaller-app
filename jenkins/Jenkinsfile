@@ -22,8 +22,6 @@ pipeline {
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
         }
-
-   }
     post{
          always{
              agent{docker 'openjdk:8-jre'}
@@ -41,4 +39,6 @@ pipeline {
               }
         }
     }
+   }
+
 }
