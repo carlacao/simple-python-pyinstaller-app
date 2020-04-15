@@ -22,12 +22,14 @@ pipeline {
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
         }
-   }
-       post{
-         always{
-             agent{docker 'openjdk:8-jre'}
-             steps{
-               sh "echo $JAVA_HOME"
+        stage('Report'){
+             agent{
+                  docker {
+                   image 'openjdk:8-jre'
+                  }
+            }
+              steps {
+                sh 'echo $JAVA_HOME'
                script {
                  allure([
                         includeProperties: false,
@@ -36,9 +38,8 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'allure-results']]
                       ])
-                 }
-              }
+                   }
+               }
         }
-    }
-
+   }
 }
