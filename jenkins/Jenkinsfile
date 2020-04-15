@@ -20,32 +20,20 @@ pipeline {
             }
             steps {
                 sh 'pytest --verbose --junit-xml test-reports/results-test-calc.xml sources/test_calc.py'
-                sh 'pytest --verbose --junit-xml test-reports/results-test-allure.xml sources/test_allure.py'
                 sh 'pytest sources/test_allure.py --alluredir ./allure-results/'
             }
             post {
                 always {
-                    junit 'test-reports/results-test-allure.xml'
-                    archiveArtifacts 'test-reports/results-test-allure.xml' 
+                   script {
+                     allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'allure-results']]
+                      ])
+                   }
                 }
             }
         }
-		stage(‘reports’){
-		 agent{
-		          none
-		 }
-		 
-		 steps {
-            script {
-            allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
-            ])
-           }
-        }
-		}
-    }
 }
